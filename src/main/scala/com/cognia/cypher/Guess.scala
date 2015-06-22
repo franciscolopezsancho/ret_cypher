@@ -28,6 +28,7 @@ class Guess {
           //last guess works well for this line
           val ret = tryLast(x.split(" ").toList,lastBestGuess)
           //tail recursion
+          println("using best "+ret)
           trad(xs,ret,decypher(ret)(x) #:: tradStream)
         }
       }
@@ -54,7 +55,7 @@ class Guess {
    *  Look up a dictionary in order to detect
    *  after iterating over diff keys what's
    *  the best guess. The key that after decrypt
-   *  finds more words in a pretty basic dictionary
+   *  finds more words.txt in a pretty basic dictionary
    * @param line
    * @param decypher
    * @return
@@ -64,7 +65,7 @@ class Guess {
       if ((bestMarkKey._1.toFloat./(line.length.toFloat)).toDouble.round == 1) return bestMarkKey._2
       if (ret == 0) bestMarkKey._2
       else {
-        //counting total words we find in the dictionary
+        //counting total words.txt we find in the dictionary
         val totalFound = line.foldLeft(0)((acc, word) =>
           acc + Reader.inDictionary(decypher(ret)(word))
         )

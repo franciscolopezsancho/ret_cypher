@@ -18,22 +18,21 @@ object RetCipher {
     //65 to 90 is A-Z  in ASCII
     //97 to 122 is a-z in ASCII
     if (isLetter(char)){
-      val encrypted = char.toInt +  shftAmt
-      if(isOverLimit(char,shftAmt)){
-        (encrypted - totalLetters).toChar
-         }
-      else if (isBelowLimit(char,shftAmt)){
-        (encrypted + totalLetters).toChar
-      } else {
-          encrypted.toChar
-      }
+        val encrypted = char.toInt +  shftAmt
+        if(isOverLimit(char,shftAmt)){
+          (encrypted - totalLetters).toChar
+        }else if (isBelowLimit(char,shftAmt)){
+          (encrypted + totalLetters).toChar
+        }else {
+            encrypted.toChar
+        }
      } else{
        char
      }
     }
 
   def isOverLimit(char:Char,ret:Int): Boolean ={
-     (char.toLower.toInt + ret > 122)
+     (char.toLower.toInt + ret > 'z'.toInt)
   }
 
   /**
@@ -43,7 +42,7 @@ object RetCipher {
    * @return
    */
   def isBelowLimit(char:Char,ret:Int): Boolean ={
-   ( char.toUpper.toInt + ret < 65)
+   ( char.toUpper.toInt + ret < 'a'.toInt)
   }
 
   /**

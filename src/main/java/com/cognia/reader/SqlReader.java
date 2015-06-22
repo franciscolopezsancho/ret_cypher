@@ -33,11 +33,7 @@ public class SqlReader
             // create a database connection
             connection = DriverManager.getConnection("jdbc:sqlite:/Users/fran/Downloads/problem6/puzzle.db");
             Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);  // set timeout to 30 sec.
-
-
-            //ResultSet rs1 = statement.executeQuery("ATTACH /Users/fran/Downloads/problem6/puzzle.db AS my_db;");
-
+            statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery("SELECT name FROM sqlite_master WHERE type='table'");
             while(rs.next())
             {

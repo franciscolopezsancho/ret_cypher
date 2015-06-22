@@ -10,14 +10,14 @@ import scala.io.Source
  */
 object Reader {
 
-  val in = Source.fromFile("/Users/fran/Downloads/problem6/puzzle.db")(StandardCharsets.ISO_8859_1)
+  val in = Source.fromFile("src\\main\\resources\\puzzle.db")(StandardCharsets.ISO_8859_1)
 
-  val dictionary = Source.fromFile("/Users/fran/Downloads/problem6/words")(StandardCharsets.ISO_8859_1)
+  val dictionary = Source.fromFile("src\\main\\resources\\words.txt")(StandardCharsets.ISO_8859_1)
 
   val loadDictionary = dictionary.getLines().toVector.map(x=>x.toUpperCase)
 
   def inDictionary(phrase:String):Int={
-    val tot =phrase.split(" ").filter(x => loadDictionary.contains(x.toUpperCase)).length
+    val tot = phrase.split(" ").filter(x => loadDictionary.contains(x.toUpperCase)).length
     tot
   }
 
