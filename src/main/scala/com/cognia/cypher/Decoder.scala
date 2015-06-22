@@ -1,7 +1,5 @@
 package com.cognia.cypher
 
-import java.util
-
 import com.cognia.cypher.bo.DecodingIndex
 
 import scala.collection.immutable.Queue
@@ -13,18 +11,7 @@ import scala.collection.immutable.Stream._
  */
 object Decoder {
 
-  def decodeAll(data:String,decoders:util.Queue[DecodingIndex],decypher:Int=>String=>String): Stream[String] ={
-    def decodeAll(data:String,decoders:util.Queue[DecodingIndex],tradStream:Stream[String]): Stream[String] ={
-      decoders.poll() match {
-        case _ => tradStream
-        case d:DecodingIndex =>
-        decodeAll (data, decoders, decypher (d.rotation) (data.substring (d.start, d.length) ) #:: tradStream)
-      }
-    }
-    var res = decodeAll(data,decoders,empty)
-    res.foreach(println)
-    res
-  }
+
 
   def trad(lines:Stream[String],decypher:Int=>String=>String,decodingIndex:Queue[DecodingIndex]): Stream[String] ={
     def trad(lines:Stream[String],lineNum:Int,decodingIndex:Queue[DecodingIndex],tradStream:Stream[String]): Stream[String] ={
@@ -41,9 +28,8 @@ object Decoder {
       }
     }
 
-    val res = trad(lines,1,decodingIndex,empty).reverse
-    res.foreach(println)
-    res
+    trad(lines,1,decodingIndex,empty).reverse
+
   }
 
 }

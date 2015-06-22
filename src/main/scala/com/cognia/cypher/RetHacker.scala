@@ -26,7 +26,8 @@ class RetHacker {
         case x #:: xs => {
           //avoiding here execute best guess checking first if
           //last guess works well for this line
-          val ret = tryLast(x.split(" ").toList,lastBestGuess)
+         // val ret = tryLast(x.split(" ").toList,lastBestGuess)
+          val ret = bestGuess(x.split(" ").toList,decypher)
           println(decypher(ret)(x))
           trad(xs,ret,decypher(ret)(x) #:: tradStream)
         }
@@ -38,15 +39,9 @@ class RetHacker {
       }  else {
         val best = bestGuess(words,decypher)
         if(best == 0){
-          println("£££££££££££££££££££££££££££££££££ disaster")
-
           lastGuess
-        }  else if(best == 1) {
-          println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ disaster")
-           best
         }else{
             best
-
         }
       }
     }

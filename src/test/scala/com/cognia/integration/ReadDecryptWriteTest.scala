@@ -22,7 +22,7 @@ class ReadDecryptWriteTest extends FlatSpec with Matchers {
 
   "A Program" should "read from file, decipher and then write to another file 2" in {
 
-    val trad = new RetHacker().trad(SQLiteReader.getBook().flatMap(x=> x.split("\n\r")),RetCipher.decrypt)
+    val trad = new RetHacker().trad(SQLiteReader.getBook(),RetCipher.decrypt)
     //Writer.inputToFile(trad,new File("puzzle.db"))
   }
 

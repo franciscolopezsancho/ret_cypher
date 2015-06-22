@@ -36,19 +36,19 @@ class ReaderTest extends FlatSpec with Matchers{
   }
   "A Detector" should "find book " in {
     val book = SQLiteReader.getBook(connectionUrl,bookTable,btColumn)
-    book.map(println)
+    //book.map(println)
     book.isEmpty should  be (false)
   }
 
   "A Detector" should "find caesarMap " in {
     val caesarMap = SQLiteReader.getCaesarMap(connectionUrl,caesarTable,crColNames)
-    caesarMap.map(println)
+    //caesarMap.map(println)
     caesarMap.isEmpty should  be (false)
   }
 
   "A Detector" should "find columns " in {
     val caesarMap = SQLiteReader.getColumns(connectionUrl,caesarTable)
-    caesarMap.map(println)
+    //caesarMap.map(println)
     caesarMap should  be (List(crStartCol,crLengthCol,crRotationCol))
   }
 

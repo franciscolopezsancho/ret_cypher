@@ -19,12 +19,27 @@ object Main extends App{
           println("This app will look in its same directory for a any file")
           println("with extension '.db' and will decipher them content in" )
           println("a file called the same name as the original but with extension .txt" )
+          println("-------------------------------------------------------------------")
+          println("a new feature is in beta development... When pass 'hackit' as param" )
+          println("the decipher will try to guess the encoding with out any help" )
+
+
+        }
+        case Array("hackit") => {
+          println("lets hack a bit")
+          listFiles().foreach { file =>
+            val sqliteFileUrl = conf.getString("dbfile.sqlite.driver") + file.getName
+            println("deciphering file: " + file.getName)
+            val decipheredBook = new RetHacker().trad(SQLiteReader.getBook(sqliteFileUrl), RetCipher.decrypt)
+            Writer.inputToFile(decipheredBook, new File(file.getName.substring(0, file.getName.indexOf(".")) + ".txt"))
+          }
         }
         case _ => {
           listFiles().foreach { file =>
-            val sqliteFileUrl = conf.getString("sqlite.driver")+file.getName
+            val sqliteFileUrl = conf.getString("dbfile.sqlite.driver")+file.getName
+            println("deciphering file: "+file.getName)
             val decipheredBook = Decoder.trad(SQLiteReader.getBook(sqliteFileUrl), RetCipher.decrypt, SQLiteReader.getCaesarMap(sqliteFileUrl))
-            Writer.inputToFile(decipheredBook, new File(file.getName.substring(0,file.getName.indexOf("."))+"txt"))
+            Writer.inputToFile(decipheredBook, new File(file.getName.substring(0,file.getName.indexOf("."))+".txt"))
           }
 
 
