@@ -1,6 +1,6 @@
 package com.cognia.reader
 
-import com.cognia.cypher.bo.ColumnsNames
+import com.cognia.reader.sqlite.{ColumnsNames, SQLiteReader}
 import com.typesafe.config.ConfigFactory
 import org.scalatest.{FlatSpec, Matchers}
 

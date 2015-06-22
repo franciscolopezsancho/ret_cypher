@@ -55,12 +55,6 @@ class RetCipherTest  extends FlatSpec with Matchers {
     decrypt("Lrf jr pna") should be ("Yes we can")
   }
 
-//  "A com.cognia.cypher.Decrypter" should "should rot13 and find that the file contains 'hello world'" in {
-//    val in = Source.fromFile("/Users/fran/Downloads/problem6/helloworld.db")(StandardCharsets.ISO_8859_1)
-//    val stack = new com.cognia.cypher.Decrypter
-//    val lines = stack.doSome(in)
-//    lines should be ("hello world")
-//
-//  }
+
 
 }

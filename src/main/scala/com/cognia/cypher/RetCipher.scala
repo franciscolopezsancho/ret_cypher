@@ -32,7 +32,7 @@ object RetCipher {
     }
 
   def isOverLimit(char:Char,ret:Int): Boolean ={
-     (char.toLower.toInt + ret > 'z'.toInt)
+     (char.toLower.toInt + ret > 122)
   }
 
   /**
@@ -42,7 +42,7 @@ object RetCipher {
    * @return
    */
   def isBelowLimit(char:Char,ret:Int): Boolean ={
-   ( char.toUpper.toInt + ret < 'a'.toInt)
+   ( char.toUpper.toInt + ret < 65)
   }
 
   /**

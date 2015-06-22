@@ -31,18 +31,17 @@ object Decoder {
       lines match {
         case Stream.Empty => tradStream
         case x #:: xs => {
-          //when reaches limit we'll use next decodingIndex
-          //TODO in case there's a wrong number of decodings?!
-          println("####################line numbers "+lineNum)
           (lineNum - (decodingIndex.head.start + decodingIndex.head.length)) match {
-            case 0 => trad(xs,lineNum+1,decodingIndex.tail,decypher(decodingIndex.head.rotation)(x) #:: tradStream)
-            case _ => trad(xs,lineNum+1,decodingIndex,decypher(decodingIndex.head.rotation)(x) #:: tradStream)
+            //when reaches limit we'll use next decodingIndex
+            case 0 => trad(xs,lineNum+1,decodingIndex.tail,decypher(26-decodingIndex.tail.head.rotation)(x) #:: tradStream)
+            //otherwise the index that is in the range
+            case _ => trad(xs,lineNum+1,decodingIndex,decypher(26-decodingIndex.head.rotation)(x) #:: tradStream)
           }
         }
       }
     }
 
-    val res = trad(lines,0,decodingIndex,empty).reverse
+    val res = trad(lines,1,decodingIndex,empty).reverse
     res.foreach(println)
     res
   }
