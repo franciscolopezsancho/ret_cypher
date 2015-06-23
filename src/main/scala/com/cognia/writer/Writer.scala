@@ -8,12 +8,12 @@ object Writer {
 
   /**
    *
-   * @param is
-   * @param f
+   * @param stream
+   * @param file
    */
-  def inputToFile(is: Stream[String], f: java.io.File) {
-    val out = new java.io.PrintWriter(f)
-    try { is.foreach(out.println) }
+  def inputToFile(stream: Stream[String], file: java.io.File) {
+    val out = new java.io.PrintWriter(file)
+    try { out.println(stream.mkString) }
     finally { out.close }
   }
 

@@ -20,13 +20,13 @@ object SQLiteReader {
   implicit val conf = ConfigFactory.load
 
   //TODO fix implicit in getBook and indexes!
-  implicit val connectionUrl = conf.getString("dbfile.path")
-  implicit val bookTable = conf.getString("dbfile.content.book.table.name")
-  implicit val btColumn = conf.getString("dbfile.content.book.table.columns.data")
-  implicit val caesarTable = conf.getString("dbfile.content.decipher.table.name")
-  implicit val ctStartCol = conf.getString("dbfile.content.decipher.table.columns.start")
-  implicit val ctLengthCol = conf.getString("dbfile.content.decipher.table.columns.length")
-  implicit val ctRotationCol = conf.getString("dbfile.content.decipher.table.columns.rotation")
+  val connectionUrl = conf.getString("dbfile.path")
+  val bookTable = conf.getString("dbfile.content.book.table.name")
+   val btColumn = conf.getString("dbfile.content.book.table.columns.data")
+   val caesarTable = conf.getString("dbfile.content.decipher.table.name")
+   val ctStartCol = conf.getString("dbfile.content.decipher.table.columns.start")
+   val ctLengthCol = conf.getString("dbfile.content.decipher.table.columns.length")
+   val ctRotationCol = conf.getString("dbfile.content.decipher.table.columns.rotation")
   val columnsNames = ColumnsNames(ctStartCol,ctLengthCol,ctRotationCol)
 
   val select_from = "SELECT * FROM "
@@ -38,7 +38,7 @@ object SQLiteReader {
     while(rs.next()) {
       tables = tables :+ rs.getString("name")
     }
-    connection.close
+    connection.close()
     tables
   }
 
@@ -47,7 +47,7 @@ object SQLiteReader {
     val rs = connection.createStatement.executeQuery(select_from + table)
     val jdbcRs = rs.asInstanceOf[JDBC4ResultSet]
     val  columns = (1 to  jdbcRs.getColumnCount()).map( x=> jdbcRs.getColumnLabel(x)).toList
-    connection.close
+    connection.close()
     columns
   }
 
@@ -61,7 +61,7 @@ object SQLiteReader {
     while(rs.next()) {
       book = book :+ rs.getString(column)
     }
-    connection.close
+    connection.close()
     book
   }
 
@@ -75,7 +75,7 @@ object SQLiteReader {
     while(rs.next()) {
       caesarMap = caesarMap :+ DecodingIndex(rs.getString(columns.start).toInt,rs.getString(columns.length).toInt,rs.getString(columns.rotate).toInt)
     }
-    connection.close
+    connection.close()
     caesarMap
   }
 
